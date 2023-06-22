@@ -23,4 +23,11 @@ contract VotingApp {
         organizer = msg.sender;
         participants[organizer].weight = 1;
     }
+
+    for (uint i = 0; i < proposalNames.length; i++) {
+        proposals.push(Proposal({
+            name: proposalNames[i],
+            voteCount: 0
+        }));
+    }
 }
