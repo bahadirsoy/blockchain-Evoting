@@ -30,4 +30,11 @@ contract VotingApp {
             voteCount: 0
         }));
     }
+
+    function assignVotingRight(address participant) public {
+        require(
+            msg.sender == organizer,
+            "Only the organizer can assign voting rights."
+        );
+    }
 }
