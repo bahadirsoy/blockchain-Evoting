@@ -12,4 +12,8 @@ contract VotingApp {
         bytes32 name;
         uint voteCount;
     }
+
+    address public organizer;
+
+    mapping(address => Participant) public participants;
 }
