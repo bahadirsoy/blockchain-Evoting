@@ -16,4 +16,11 @@ contract VotingApp {
     address public organizer;
 
     mapping(address => Participant) public participants;
+
+    Proposal[] public proposals;
+
+    constructor(bytes32[] memory proposalNames) public {
+        organizer = msg.sender;
+        participants[organizer].weight = 1;
+    }
 }
