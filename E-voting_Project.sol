@@ -36,5 +36,11 @@ contract VotingApp {
             msg.sender == organizer,
             "Only the organizer can assign voting rights."
         );
+        require(
+            !participants[participant].voted,
+            "The participant has already voted."
+        );
+        require(participants[participant].weight == 0);
+        participants[participant].weight = 1;
     }
 }
