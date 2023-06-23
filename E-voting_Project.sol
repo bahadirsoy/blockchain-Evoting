@@ -42,6 +42,7 @@ contract VotingApp {
         );
         require(participants[participant].weight == 0);
         participants[participant].weight = 1;
+
     }
 
     function stakeTokens() public payable {
