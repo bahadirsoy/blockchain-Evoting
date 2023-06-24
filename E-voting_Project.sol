@@ -20,10 +20,11 @@ contract VotingApp {
     }
 
     address public organizer;
-
     mapping(address => Participant) public participants;
-
     Proposal[] public proposals;
+    mapping(address => Validator) public validators;
+    uint256 public totalStake;
+    uint256 public consensusThreshold = 50; // Minimum stake percentage required for consensus
 
     constructor(bytes32[] memory proposalNames) public {
         organizer = msg.sender;
