@@ -64,4 +64,10 @@ contract VotingApp {
 
         totalStake += msg.value;
     }
+
+    function delegateVote(address to) public {
+        Participant storage sender = participants[msg.sender];
+        require(!sender.voted, "You have already voted.");
+        require(to != msg.sender, "Self-delegation is not allowed.");
+    }
 }
