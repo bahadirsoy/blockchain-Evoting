@@ -105,4 +105,8 @@ contract VotingApp {
 
         return (winningVoteCount * 100) >= (totalStake * consensusThreshold);
     }
+
+    function getWinningProposal() public view returns (uint winningProposal_) {
+        require(calculateConsensus(), "Consensus has not been reached.");
+    }
 }
