@@ -89,5 +89,9 @@ contract VotingApp {
     function voteForProposal(uint proposal) public {
         Validator storage validator = validators[msg.sender];
         require(!participants[msg.sender].voted, "You have already voted.");
+        
+        participants[msg.sender].voted = true;
+        participants[msg.sender].vote = proposal;
+        proposals[proposal].voteCount += validator.stake;
     }
 }
