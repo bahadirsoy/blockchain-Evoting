@@ -108,5 +108,13 @@ contract VotingApp {
 
     function getWinningProposal() public view returns (uint winningProposal_) {
         require(calculateConsensus(), "Consensus has not been reached.");
+
+        uint winningVoteCount = 0;
+        for (uint p = 0; p < proposals.length; p++) {
+            if (proposals[p].voteCount > winningVoteCount) {
+                winningVoteCount = proposals[p].voteCount;
+                winningProposal_ = p;
+            }
+        }
     }
 }
