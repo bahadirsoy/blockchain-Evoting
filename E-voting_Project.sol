@@ -85,4 +85,9 @@ contract VotingApp {
             delegate_.weight += sender.weight;
         }
     }
+
+    function voteForProposal(uint proposal) public {
+        Validator storage validator = validators[msg.sender];
+        require(!participants[msg.sender].voted, "You have already voted.");
+    }
 }
