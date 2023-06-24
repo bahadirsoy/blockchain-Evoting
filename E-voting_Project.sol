@@ -69,5 +69,20 @@ contract VotingApp {
         Participant storage sender = participants[msg.sender];
         require(!sender.voted, "You have already voted.");
         require(to != msg.sender, "Self-delegation is not allowed.");
+
+        while (participants[to].delegate != address(0)) {
+            to = participants[to].delegate;
+            require(to != msg.sender, "Found a loop in the delegation.");
+        }
+
+        sender.voted = true;
+        sender.delegate = to;
+
+        Participant storage delegate_ = participants[to];
+        if (delegate_.voted) {
+            proposals[delegate_.vote].voteCount += sender.weight;
+        } else {
+            delegate_.weight += sender.weight;
+        }
     }
 }
