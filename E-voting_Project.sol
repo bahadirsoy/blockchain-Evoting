@@ -89,9 +89,20 @@ contract VotingApp {
     function voteForProposal(uint proposal) public {
         Validator storage validator = validators[msg.sender];
         require(!participants[msg.sender].voted, "You have already voted.");
-        
+
         participants[msg.sender].voted = true;
         participants[msg.sender].vote = proposal;
         proposals[proposal].voteCount += validator.stake;
+    }
+
+    function calculateConsensus() private view returns (bool) {
+        uint256 winningVoteCount = proposals[0].voteCount;
+        for (uint256 p = 1; p < proposals.length; p++) {
+            if (proposals[p].voteCount > winningVoteCount) {
+                winningVoteCount = proposals[p].voteCount;
+            }
+        }
+
+        return (winningVoteCount * 100) >= (totalStake * consensusThreshold);
     }
 }
