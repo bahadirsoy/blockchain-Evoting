@@ -13,6 +13,12 @@ contract VotingApp {
         uint voteCount;
     }
 
+    struct Validator {
+        address validatorAddress;
+        uint256 stake;
+        bool isValidator;
+    }
+
     address public organizer;
 
     mapping(address => Participant) public participants;
