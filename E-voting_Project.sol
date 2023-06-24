@@ -57,5 +57,11 @@ contract VotingApp {
 
         Validator storage validator = validators[msg.sender];
         require(!validator.isValidator, "You have already staked tokens.");
+
+        validator.validatorAddress = msg.sender;
+        validator.stake = msg.value;
+        validator.isValidator = true;
+
+        totalStake += msg.value;
     }
 }
